@@ -7,6 +7,7 @@ csv_path = os.path.join("Resources", "budget_data.csv")
 #CREATES LISTS FOR BLANK DATA
 bank_date = []
 win_loss = []
+win_loss_diff = []
 
 #READS CSV FILE - CLASS DEMONSTRATION
 with open(csv_path, encoding='UTF-8') as csvfile:
@@ -18,36 +19,59 @@ with open(csv_path, encoding='UTF-8') as csvfile:
         bank_date.append(row[0])
         win_loss.append(row[1])
     
-    #CALCULATES NUMBER OF ROWS
-    total_mth = len(bank_date)
-    total_money = len(win_loss)
+#CALCULATES NUMBER OF ROWS
+total_mth = len(bank_date)
+total_money = len(win_loss)
 
-    #CONVERTS STRING TO INTEGER
-    #REFERENCED STACKOVERFLOW 43769886
-    money_int = [int(x) for x in win_loss]
+#CONVERTS STRING TO INTEGER
+#REFERENCED STACKOVERFLOW 43769886
+money_int = [int(x) for x in win_loss]
 
-    #CALCULATES NET PROFIT/LOSS
-    sum_money = sum(money_int)
+#CALCULATES NET PROFIT/LOSS
+sum_money = sum(money_int)
 
-    #calculates average changes - WRONG AVERAGE
-    #avg_money = sum_money/int(total_money)
-    #print(avg_money)
- 
+#CREATES LIST FOR DAY TO DAY CHANGES - USED FOR FINDING AVG, MAX, AND MIN
+#COUNT = 1 TO AVOID ERROR WHEN SUBTRACTING
+count = 1
+for value in money_int:
+    #AVOIDS GOING OUT OF RANGE SINCE VALUE STARTS AT 1 INSTEAD OF 0
+    if count == len(money_int):
+        exit
+    #SUBTRACTS CURRENT DAY FROM PRIOR TO CAPTURE PROFIT/LOSS AND STORES IN LIST
+    else:
+        diff = (money_int[count]) - (money_int[(count-1)])
+        win_loss_diff.append(diff)
+    count = count + 1
 
-    #calculates greatest increase/decrease day over day (not total)
-        
+#CALCULATES AVERAGE PROFIT/LOSS CHANGES
+avg_money = round((sum(win_loss_diff))/(len(win_loss_diff)),2)
 
+#DETERMINES GREATEST INCREASE AND GREATEST DECREASE
+max_win = max(win_loss_diff)
+max_loss = min(win_loss_diff)
+
+#IDENTIFIES INDEX OF GREATEST VALUES FOR DATE IDENTIFICATION
+win_index = win_loss_diff.index(max_win)
+loss_index = win_loss_diff.index(max_loss)
+
+#TITLE/HEADING
 print("Financial Analysis")
 print("------------------------------")
+
+#TOTAL MONTHS
 print(f"Total Months: {total_mth}")
-#print(sum_money)
+
+#SUM MONEY
 print(f"Total: ${sum_money}")
-#print(avg_money)
-print(f"Average Change: ")
-#print(max_win)
-print(f"Greatest Increase in Profits: ")
-#print(max_loss)
-print(f"Greatest Decrease in Profits: ")
+
+#AVERAGE DAILY CHANGE
+print(f"Average Change: ${avg_money}")
+
+#GREATEST INCREASE (ADD 1 TO INDEX TO COMPENSATE FOR COUNT STARTING AT 1 IN FOR LOOP)
+print(f"Greatest Increase in Profits: {bank_date[win_index+1]} (${max_win})")
+
+#GREATEST DECREASE (ADD 1 TO INDEX TO COMPENSATE FOR COUNT STARTING AT 1 IN FOR LOOP)
+print(f"Greatest Decrease in Profits: {bank_date[loss_index+1]} (${max_loss})")
 
 #CSV TO CREATE
 #output_path = os.path.join("analysis", "budget_results.csv")
