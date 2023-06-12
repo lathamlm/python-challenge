@@ -8,13 +8,13 @@ csv_path = os.path.join("Resources", "election_data.csv")
 ballot_id = []
 county = []
 candidate = []
+winner = []
 
 #READS CSV FILE - CLASS DEMONSTRATION
 with open(csv_path, encoding='UTF-8') as csvfile:
     csv_read = csv.reader(csvfile, delimiter=',')
     csv_header = next(csv_read)
 
-    count = 0
     #CREATES LISTS
     for row in csv_read:
         ballot_id.append(row[0])
@@ -28,19 +28,26 @@ vote_count = len(ballot_id)
 #ELIMINATES DUPLICATES
 #REFERENCED STACKOVERFLOW 7961363
 candidate_names = sorted(list(set(candidate)))
-#(len(candidate_names))
-  
+    
 print("Election Results")
 print("--------------------------")
 print(f"Total Votes: {vote_count}")
 print("--------------------------")
-#print candidates c/ percent won and vote count
-print(f"{candidate_names[0]}: ")  # <-- works for this assignment
-print(f"{candidate_names[1]}: ")  #     but not very flexible for additional
-print(f"{candidate_names[2]}: ")  #     candidates or csv files (loop?)
+
+#PRINT CANDIDATES WITH VOTE COUNT AND PERCENT - FLUID
+count = 0
+for person in candidate_names:
+    vote_num = candidate.count(candidate_names[count])
+    vote_percent = round((vote_num/vote_count)*100, 3)
+    winner.append(vote_num)
+    print(f"{candidate_names[count]}: {vote_percent}% ({vote_num})")
+    count = count + 1
+
 print("--------------------------")
 #print winner with most votes
-print(f"Winner: ")
+lead_candidate = max(winner)
+win_count = (winner.index(lead_candidate))
+print(f"Winner: {candidate_names[win_count]}")
 print("--------------------------")
 
 #SAVE FOR LATER WHEN FORMULAS ALL WORKING
