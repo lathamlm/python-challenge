@@ -54,29 +54,41 @@ max_loss = min(win_loss_diff)
 win_index = win_loss_diff.index(max_win)
 loss_index = win_loss_diff.index(max_loss)
 
-#TITLE/HEADING
-print("Financial Analysis")
-print("------------------------------")
-
 #TOTAL MONTHS
-print(f"Total Months: {total_mth}")
+month_length = f"Total Months: {total_mth}"
 
 #SUM MONEY
-print(f"Total: ${sum_money}")
+money_sum = f"Total: ${sum_money}"
 
 #AVERAGE DAILY CHANGE
-print(f"Average Change: ${avg_money}")
+money_avg = f"Average Change: ${avg_money}"
 
 #GREATEST INCREASE (ADD 1 TO INDEX TO COMPENSATE FOR COUNT STARTING AT 1 IN FOR LOOP)
-print(f"Greatest Increase in Profits: {bank_date[win_index+1]} (${max_win})")
+great_up = f"Greatest Increase in Profits: {bank_date[win_index+1]} (${max_win})"
 
 #GREATEST DECREASE (ADD 1 TO INDEX TO COMPENSATE FOR COUNT STARTING AT 1 IN FOR LOOP)
-print(f"Greatest Decrease in Profits: {bank_date[loss_index+1]} (${max_loss})")
+great_down = f"Greatest Decrease in Profits: {bank_date[loss_index+1]} (${max_loss})"
 
-#CSV TO CREATE
-#output_path = os.path.join("analysis", "budget_results.csv")
+#PRINT TO TERMINAL
+print("Financial Analysis")
+print("------------------------------")
+print(month_length)
+print(money_sum)
+print(money_avg)
+print(great_up)
+print(great_down)
 
-#with open(output_path, "w", newline ='') as csvfile:
-    #csv_write = csv.writer(csvfile, delimiter=',')
-    #csv_write.writerow("Financial Analysis")
-    #csv_write.writerow("-------------------------------")
+
+#CSV PATH TO CREATE
+output_path = os.path.join("analysis", "budget_results.csv")
+
+#REFERENCED STACKOVERFLOW 15129567 FOR [] 1 COLUMN
+with open(output_path, "w", newline ='') as csvfile:
+    csv_write = csv.writer(csvfile, delimiter=',')
+    csv_write.writerow(["Financial Analysis", ""])
+    csv_write.writerow(["-------------------------------"])
+    csv_write.writerow([month_length])
+    csv_write.writerow([money_sum])
+    csv_write.writerow([money_avg])
+    csv_write.writerow([great_up])
+    csv_write.writerow([great_down])
