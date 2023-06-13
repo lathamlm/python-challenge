@@ -85,7 +85,7 @@ output_path = os.path.join("analysis", "budget_results.csv")
 #REFERENCED STACKOVERFLOW 15129567 FOR [] 1 COLUMN
 with open(output_path, "w", newline ='') as csvfile:
     csv_write = csv.writer(csvfile, delimiter=',')
-    csv_write.writerow(["Financial Analysis", ""])
+    csv_write.writerow(["Financial Analysis"])
     csv_write.writerow(["-------------------------------"])
     csv_write.writerow([month_length])
     csv_write.writerow([money_sum])
