@@ -69,9 +69,11 @@ great_up = f"Greatest Increase in Profits: {bank_date[win_index+1]} (${max_win})
 #GREATEST DECREASE (ADD 1 TO INDEX TO COMPENSATE FOR COUNT STARTING AT 1 IN FOR LOOP)
 great_down = f"Greatest Decrease in Profits: {bank_date[loss_index+1]} (${max_loss})"
 
+divider = "-------------------------------"
+
 #PRINT TO TERMINAL
 print("Financial Analysis")
-print("------------------------------")
+print(divider)
 print(month_length)
 print(money_sum)
 print(money_avg)
@@ -86,7 +88,7 @@ output_path = os.path.join("analysis", "budget_results.csv")
 with open(output_path, "w", newline ='') as csvfile:
     csv_write = csv.writer(csvfile, delimiter=',')
     csv_write.writerow(["Financial Analysis"])
-    csv_write.writerow(["-------------------------------"])
+    csv_write.writerow([divider])
     csv_write.writerow([month_length])
     csv_write.writerow([money_sum])
     csv_write.writerow([money_avg])
