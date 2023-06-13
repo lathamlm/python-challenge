@@ -17,3 +17,5 @@ REFERENCES:
    #converts string list to integer: https://stackoverflow.com/questions/43769886/cant-convert-list-string-to-integer by Antimony
 
    #methods of list objects (used throughout): https://docs.python.org/3/tutorial/datastructures.html
+
+   #fixing one character per column in write csv file: https://stackoverflow.com/questions/15129567/csv-writer-writing-each-character-of-word-in-separate-column-cell
