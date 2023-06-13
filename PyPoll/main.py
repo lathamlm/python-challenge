@@ -59,6 +59,7 @@ output(print)
 output_path = os.path.join("analysis", "election_results.csv")
 
 #REFERENCED STACKOVERFLOW 15129567 FOR [] 1 COLUMN
+#COULDN'T USE OUTPUT() DUE TO [] NEED HERE
 with open(output_path, "w", newline='') as csvfile:
     csv_write = csv.writer(csvfile, delimiter=',')
     w_csv = csv_write.writerow
